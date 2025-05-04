@@ -31,7 +31,7 @@ import java.util.Set;
 @Getter
 public class CamTorumMiningPlugin extends Plugin
 {
-	private static final int CAM_TORUM_REGION = 6037;
+
 	@Inject
 	private Client client;
 	@Inject
@@ -61,8 +61,17 @@ public class CamTorumMiningPlugin extends Plugin
 		ObjectID.ROCKS_51490,
 		ObjectID.ROCKS_51492
 	);
-	private boolean inCamTorumMiningArea;
 
+	private static final Set<Integer> CAM_TORUM_REGIONS =  ImmutableSet.of(
+		5524,
+		5525,
+		5780,
+		5781,
+		6036,
+		6037
+	);
+
+	private boolean inCamTorumMiningArea;
 	private int lastNotificationTick;
 
 	@Override
@@ -73,7 +82,7 @@ public class CamTorumMiningPlugin extends Plugin
 		if (client.getGameState() == GameState.LOGGED_IN) {
 			clientThread.invokeLater(() ->
 			{
-				inCamTorumMiningArea = client.getLocalPlayer().getWorldLocation().getRegionID() == CAM_TORUM_REGION;
+				inCamTorumMiningArea = isInCamTorumMiningArea();
 			});
 		}
 	}
@@ -97,7 +106,7 @@ public class CamTorumMiningPlugin extends Plugin
 			case HOPPING:
 				streams.clear();
 				rocks.clear();
-				inCamTorumMiningArea = client.getLocalPlayer().getWorldLocation().getRegionID() == CAM_TORUM_REGION;
+				inCamTorumMiningArea = isInCamTorumMiningArea();
 				lastNotificationTick = -100; // negative value so instant logging in on water will still notify
 		}
 	}
@@ -213,6 +222,12 @@ public class CamTorumMiningPlugin extends Plugin
 				entry.setDeprioritized(true);
 			}
 		}
+	}
+
+	private boolean isInCamTorumMiningArea() {
+		int currentMapRegion = client.getLocalPlayer().getWorldLocation().getRegionID();
+
+		return CAM_TORUM_REGIONS.contains(currentMapRegion);
 	}
 
 	@Provides
