@@ -165,6 +165,7 @@ public class CamTorumMiningPlugin extends Plugin
 		lastNotificationTick = client.getTickCount();
 
 		boolean alreadyMiningStream = false;
+		boolean tooFar = true;
 		WorldPoint wp = client.getLocalPlayer().getWorldLocation();
 		for (Map.Entry<TileObject, Tile> entry : streams.entrySet())
 		{
@@ -173,6 +174,8 @@ public class CamTorumMiningPlugin extends Plugin
 			{
 				continue;
 			}
+			//if any tile is close enough, send notification
+			tooFar = false;
 
 			int dist = Math.abs(wp.getX() - tile.getWorldLocation().getX()) + Math.abs(wp.getY() - tile.getWorldLocation().getY());
 			if (dist != 1)
@@ -187,7 +190,7 @@ public class CamTorumMiningPlugin extends Plugin
 			}
 		}
 
-		if (!alreadyMiningStream)
+		if (!alreadyMiningStream && !tooFar)
 		{
 			notifier.notify("Watery rocks spawned!");
 		}
