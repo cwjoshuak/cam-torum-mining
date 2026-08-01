@@ -32,6 +32,10 @@ public class CamTorumMiningOverlay extends Overlay {
 			return null;
 		}
 		Player player = client.getLocalPlayer();
+		if (player == null)
+		{
+			return null;
+		}
 		plugin.getStreams().forEach((object, tile) ->
 		{
 			if (tile.getWorldLocation().distanceTo(player.getWorldLocation()) < config.maxDistance()) {
