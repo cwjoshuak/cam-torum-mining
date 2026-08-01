@@ -4,6 +4,7 @@ import net.runelite.client.config.Alpha;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.Notification;
 import net.runelite.client.util.ColorUtil;
 
 import java.awt.*;
@@ -52,8 +53,8 @@ public interface CamTorumMiningConfig extends Config
 		name = "Notify Water Spawn",
 		description = "Notifies you when watery rocks spawn"
 	)
-	default boolean notifyWater() {
-		return true;
+	default Notification notifyWater() {
+		return Notification.ON;
 	}
 
 	@ConfigItem(

@@ -151,7 +151,7 @@ public class CamTorumMiningPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
-		if (!inCamTorumMiningArea || streams.isEmpty() || !config.notifyWater())
+		if (!inCamTorumMiningArea || streams.isEmpty())
 		{
 			return;
 		}
@@ -189,7 +189,7 @@ public class CamTorumMiningPlugin extends Plugin
 
 		if (!alreadyMiningStream)
 		{
-			notifier.notify("Watery rocks spawned!");
+			notifier.notify(config.notifyWater(), "Watery rocks spawned!");
 		}
 	}
 
