@@ -73,7 +73,7 @@ public class CamTorumMiningPlugin extends Plugin
 		if (client.getGameState() == GameState.LOGGED_IN) {
 			clientThread.invokeLater(() ->
 			{
-				inCamTorumMiningArea = client.getLocalPlayer().getWorldLocation().getRegionID() == CAM_TORUM_REGION;
+				inCamTorumMiningArea = client.getLocalPlayer() == null ? false : client.getLocalPlayer().getWorldLocation().getRegionID() == CAM_TORUM_REGION;
 			});
 		}
 	}
@@ -97,7 +97,7 @@ public class CamTorumMiningPlugin extends Plugin
 			case HOPPING:
 				streams.clear();
 				rocks.clear();
-				inCamTorumMiningArea = client.getLocalPlayer().getWorldLocation().getRegionID() == CAM_TORUM_REGION;
+				inCamTorumMiningArea = client.getLocalPlayer() == null ? false : client.getLocalPlayer().getWorldLocation().getRegionID() == CAM_TORUM_REGION;
 				lastNotificationTick = -100; // negative value so instant logging in on water will still notify
 		}
 	}
