@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
+import net.runelite.api.gameval.ObjectID;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -56,10 +57,10 @@ public class CamTorumMiningPlugin extends Plugin
 	private Notifier notifier;
 
 	private static final Set<Integer> ROCK_OBJECT_IDS = ImmutableSet.of(
-		ObjectID.ROCKS_51486,
-		ObjectID.ROCKS_51488,
-		ObjectID.ROCKS_51490,
-		ObjectID.ROCKS_51492
+		ObjectID.VARLAMORE_MINING_ROCK_EMPTY,
+		ObjectID.VARLAMORE_MINING_ROCK_EMPTY02,
+		ObjectID.VARLAMORE_MINING_ROCK_EMPTY03,
+		ObjectID.VARLAMORE_MINING_ROCK_EMPTY04
 	);
 	private boolean inCamTorumMiningArea;
 
@@ -136,7 +137,7 @@ public class CamTorumMiningPlugin extends Plugin
 		{
 			return;
 		}
-		if (newObject.getId() == 51493)
+		if (newObject.getId() == ObjectID.VARLAMORE_MINING_SPECIAL_ROCK)
 		{
 			streams.put(newObject, tile);
 			return;
